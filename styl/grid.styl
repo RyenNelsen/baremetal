@@ -1,0 +1,67 @@
+// safe to edit
+$desktop-width = 1200px
+$mobile-width = 768px
+$rows = 12
+
+// do not edit past here
+$pushes = $rows - 1
+
+*, *:after, *:before
+    -webkit-box-sizing border-box
+    -moz-box-sizing border-box
+    box-sizing border-box
+
+body
+    margin 0
+
+.row
+    width 100%
+    max-width $desktop-width
+    min-width $mobile-width - 1
+    margin 0 auto
+    overflow hidden
+    padding 5px 10px
+    &:after
+        content ""
+        display table
+        clear both
+
+[class*='col-']
+    float left
+    min-height 1px
+    padding 0 5px
+
+// generate grid
+for x in 1..$rows
+    .col-{x}-12
+        width (((x)/12)*100)%
+
+// generate push 
+for x in 1..$pushes
+    .push-{x}-12
+        margin-left (((x)/12)*100)%
+
+// mobile
+@media handheld, only screen and (max-width: $mobile-width)
+    .row
+        width 100%
+        min-width 0
+        margin-left 0
+        margin-right 0
+        // padding 0 10px
+        padding 0 5px
+    [class*='col-']
+        width auto
+        float none
+        // margin 10px 0
+        margin 0 0 10px 0
+        // padding 0 10px
+        // padding-bottom 10px
+        padding 0
+    [class*='col-sm-']
+        float left
+        margin 0 0 10px
+        padding 0 10px
+    for x in 1..12
+        .col-sm-{x}-12
+            width (((x)/12)*100)%
