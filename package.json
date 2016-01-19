@@ -1,0 +1,21 @@
+{
+  "name": "baremetal",
+  "version": "0.1.0",
+  "description": "Lightweight CSS framework.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyenNelsen/baremetal.git"
+  },
+  "author": "Ryen Nelsen <ryennelsen@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RyenNelsen/baremetal/issues"
+  },
+  "homepage": "https://github.com/RyenNelsen/baremetal#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-stylus": "^2.2.0"
+  }
+}
