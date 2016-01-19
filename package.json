@@ -8,6 +8,9 @@
   },
   "author": "Ryen Nelsen <ryennelsen@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "node ./node_modules/gulp/bin/gulp.js"
+  },
   "bugs": {
     "url": "https://github.com/RyenNelsen/baremetal/issues"
   },
