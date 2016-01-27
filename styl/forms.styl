@@ -1,5 +1,20 @@
 .form-group
     // button
+    button, input[type=button]
+        padding .75em 2em
+        border-radius 1px
+        border 0
+        background-color $base-color
+        color #eee
+        transition background-color .25s ease-out
+
+        &:hover
+            background-color $base-color-dark
+            cursor pointer
+
+        &:focus
+            outline: 0
+
     // checkbox
     // color
     // date
