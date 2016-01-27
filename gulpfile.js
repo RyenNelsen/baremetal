@@ -26,7 +26,7 @@ gulp.task('build:prod', function() {
 });
 
 gulp.task('stylus:watch', function() {
-    gulp.watch('./styl/**/*.styl', ['stylus:main']);
+    gulp.watch('./styl/**/*.styl', ['build:dev']);
 });
 
 gulp.task('watch', ['build:dev', 'stylus:watch']);
