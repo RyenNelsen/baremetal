@@ -22,7 +22,7 @@ for x in 1..$rows
     .col-{x}-12
         width (((x)/12)*100)%
 
-// generate push 
+// generate push
 for x in 1..$pushes
     .push-{x}-12
         margin-left (((x)/12)*100)%
@@ -34,15 +34,11 @@ for x in 1..$pushes
         min-width 0
         margin-left 0
         margin-right 0
-        // padding 0 10px
         padding 0 5px
     [class*='col-']
         width auto
         float none
-        // margin 10px 0
         margin 0 0 10px 0
-        // padding 0 10px
-        // padding-bottom 10px
         padding 0
     [class*='col-sm-']
         float left
