@@ -3,6 +3,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var stylus = require('gulp-stylus');
 var rename = require('gulp-rename');
 var nib = require('nib');
+var cssnano = require('gulp-cssnano');
 
 var mainStyl = './styl/main.styl';
 
@@ -17,7 +18,8 @@ gulp.task('build:dev', function() {
 
 gulp.task('build:prod', function() {
     gulp.src(mainStyl)
-        .pipe(stylus({ compress: true, use: nib() }))
+        .pipe(stylus({ use: nib() }))
+        .pipe(cssnano())
         .pipe(rename('baremetal.min.css'))
         .pipe(gulp.dest('./build/production'));
     gulp.src(mainStyl)
