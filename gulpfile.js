@@ -2,15 +2,15 @@ var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var stylus = require('gulp-stylus');
 var rename = require('gulp-rename');
-var nib = require('nib');
 var cssnano = require('gulp-cssnano');
+var poststylus = require('poststylus');
 
 var mainStyl = './styl/main.styl';
 
 gulp.task('build:dev', function() {
     gulp.src(mainStyl)
         .pipe(sourcemaps.init())
-        .pipe(stylus({ use: nib() }))
+        .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
         .pipe(sourcemaps.write())
         .pipe(rename('baremetal.css'))
         .pipe(gulp.dest('./build/development'));
@@ -18,12 +18,12 @@ gulp.task('build:dev', function() {
 
 gulp.task('build:prod', function() {
     gulp.src(mainStyl)
-        .pipe(stylus({ use: nib() }))
+        .pipe(stylus())
         .pipe(cssnano({ discardComments: false }))
         .pipe(rename('baremetal.min.css'))
         .pipe(gulp.dest('./build/production'));
     gulp.src(mainStyl)
-        .pipe(stylus({ use: nib() }))
+        .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
         .pipe(rename('baremetal.css'))
         .pipe(gulp.dest('./build/production'));
 });
