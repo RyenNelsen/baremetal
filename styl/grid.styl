@@ -20,12 +20,12 @@ $pushes = $rows - 1
 // generate grid
 for x in 1..$rows
     .col-{x}-12
-        width (((x)/12)*100)%
+        width unit(round(((x)/12)*100, 2), '%')
 
 // generate push
 for x in 1..$pushes
     .push-{x}-12
-        margin-left (((x)/12)*100)%
+        margin-left unit(round(((x)/12)*100, 2), '%')
 
 // mobile
 @media handheld, only screen and (max-width: $mobile-width)
@@ -46,4 +46,4 @@ for x in 1..$pushes
         padding 0 10px
     for x in 1..12
         .col-sm-{x}-12
-            width (((x)/12)*100)%
+            width unit(round(((x)/12)*100, 2), '%')
