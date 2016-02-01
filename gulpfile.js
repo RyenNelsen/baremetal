@@ -19,7 +19,7 @@ gulp.task('build:dev', function() {
 gulp.task('build:prod', function() {
     gulp.src(mainStyl)
         .pipe(stylus({ use: nib() }))
-        .pipe(cssnano())
+        .pipe(cssnano({ discardComments: false }))
         .pipe(rename('baremetal.min.css'))
         .pipe(gulp.dest('./build/production'));
     gulp.src(mainStyl)
