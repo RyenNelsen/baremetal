@@ -3,34 +3,34 @@ button, input, optgroup, select, textarea, .button
     font inherit
     letter-spacing .01rem
     &:focus
-        outline: 0
+        outline 0
 
 // all inputs that are within a standard box
 input[type=date], input[type=datetime], input[type=datetime-local], input[type=email],
 input[type=month], input[type=number], input[type=password], input[type=tel],
 input[type=text], input[type=time], input[type=url], input[type=week], input[type=search],
 textarea, select
-    width 100%
     border 1px solid $medium-light-gray
     border-radius 1px
-    padding .75rem 1rem
     box-shadow inset 0 1px $light-gray
+    padding .75rem 1rem
     transition border-color .25s ease-out, box-shadow .5s ease-out
+    width 100%
     &:focus
         border 1px solid $regular-grey
         box-shadow 0 0 5px $medium-gray
 
 // button
 .button
-    vertical-align middle
-    display inline-block
-    text-decoration none
-    padding .75rem 1rem
-    border-radius 1px
-    border solid 1px transparent
     background-color $base-color
-    color #eee
+    border solid 1px transparent
+    border-radius 1px
+    color $button-gray
+    display inline-block
+    padding .75rem 1rem
+    text-decoration none
     transition background-color .25s ease-out
+    vertical-align middle
     &:hover
         background-color $base-color-dark
         cursor pointer
