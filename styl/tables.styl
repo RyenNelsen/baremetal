@@ -1,0 +1,29 @@
+table
+    border-collapse collapse
+    border-spacing 0
+    width 100%
+
+    thead
+        border 1px solid $light-gray
+
+        tr
+            background-color $5-gray
+            text-align left
+
+    tbody
+        border 1px solid $light-gray
+
+        tr
+            &:nth-child(even)
+                background-color $light-gray
+
+    td, th
+        padding .75rem 1rem
+
+    // .hover class
+    &.hover
+        tbody tr:hover
+            background-color $5-gray
+
+            &:nth-child(even)
+                background-color $15-gray
