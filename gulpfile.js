@@ -19,7 +19,7 @@ gulp.task('build:dev', function() {
 
 gulp.task('build:prod', function() {
     gulp.src(mainStyl)
-        .pipe(stylus())
+        .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
         .pipe(cssnano({ discardComments: false }))
         .pipe(rename('baremetal.min.css'))
         .pipe(gulp.dest('./build/production'));
