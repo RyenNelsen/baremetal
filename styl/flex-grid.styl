@@ -1,0 +1,33 @@
+$small-screen = 768px
+$medium-screen = 960px
+$large-screen = 1200px
+
+generateFlexGrid($name = 'sm', $columns = 12)
+    $classSelector = \' + 'flex-' + $name + \'
+    [class*={$classSelector}]
+        padding 0 10px
+    for $x in 1..$columns
+        .flex-{$name}-{$x}-{$columns}
+            flex 0 0 round(1% * (($x / $columns) * 100), 2)
+
+.flex-grid
+    display flex
+    flex-wrap wrap
+    margin 0 auto
+    max-width $large-screen
+
+// automatically calculate size (can be overwritten by any classes below this)
+.flex-auto
+    flex 1
+    padding 0 10px
+
+// for small screens/default size
+generateFlexGrid()
+
+// for medium sized screens
+@media (min-width $medium-screen)
+    generateFlexGrid('md')
+
+// for larger screens
+@media (min-width $large-screen)
+    generateFlexGrid('lg')
