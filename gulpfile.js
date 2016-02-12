@@ -36,9 +36,9 @@ gulp.task('lint', function() {
 });
 
 gulp.task('stylus:watch', function() {
-    gulp.watch('./styl/**/*.styl', ['build:dev']);
+    gulp.watch('./styl/**/*.styl', ['lint', 'build:dev']);
 });
 
 gulp.task('watch', ['build:dev', 'stylus:watch']);
 
-gulp.task('default', ['build:dev', 'build:prod']);
+gulp.task('default', ['lint', 'build:dev', 'build:prod']);
