@@ -8,6 +8,7 @@ var stylint = require('gulp-stylint');
 
 var mainStyl = './styl/main.styl';
 var flexStyl = './styl/main-flexonly.styl'; // flexbox only grid
+var floatStyl = './styl/main-floatonly.styl'; // float only grid
 
 gulp.task('build:dev', function() {
     gulp.src(mainStyl)
@@ -37,6 +38,16 @@ gulp.task('build:prod', function() {
         .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
         .pipe(cssnano({ discardComments: false }))
         .pipe(rename('baremetal.flex.min.css'))
+        .pipe(gulp.dest('./build/production'));
+    // class float-only grid system
+    gulp.src(floatStyl)
+        .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
+        .pipe(rename('baremetal.float.css'))
+        .pipe(gulp.dest('./build/production'));
+    gulp.src(floatStyl)
+        .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
+        .pipe(cssnano({ discardComments: false }))
+        .pipe(rename('baremetal.float.min.css'))
         .pipe(gulp.dest('./build/production'));
 });
 
