@@ -29,12 +29,12 @@ generateFlexGrid($name = 'sm', $columns = 12)
 // TODO: Add column layouts
 
 // for small screens/default size
-generateFlexGrid()
+generateFlexGrid('sm', $columns)
 
 // for medium sized screens
 @media (min-width $medium-screen)
-    generateFlexGrid('md')
+    generateFlexGrid('md', $columns)
 
 // for larger screens
 @media (min-width $large-screen)
-    generateFlexGrid('lg')
+    generateFlexGrid('lg', $columns)
