@@ -1,49 +1,35 @@
-$pushes = $rows - 1
+generateFloatGrid($name = 'sm', $columns = 12)
+    $pushes = $columns - 1
+    for $x in 1..$columns
+        .col-{$name}-{$x}
+            width round(1% * (($x / $columns) * 100), 2)
+    for $x in 1..$pushes
+        .push-{$name}-{$x}
+            margin-left round(1% * (($x / $columns) * 100), 2)
 
 .row
     margin 0 auto
-    max-width $desktop-width
-    min-width $mobile-width - 1
+    max-width $large-screen
     overflow hidden
-    padding 5px 10px
     width 100%
     &:after
         clear both
-        content ""
+        content ''
         display table
 
+// all 'col-' should have this applied to them, no matter the size
 [class*='col-']
     float left
     min-height 1px
     padding 0 5px
 
-// generate grid
-for x in 1..$rows
-    .col-{x}-12
-        width unit(round(((x)/12)*100, 2), '%')
+// for small screens
+generateFloatGrid('sm', $columns)
 
-// generate push
-for x in 1..$pushes
-    .push-{x}-12
-        margin-left unit(round(((x)/12)*100, 2), '%')
+// for medium sized screens
+@media (min-width $medium-screen)
+    generateFloatGrid('md', $columns)
 
-// mobile
-@media handheld, only screen and (max-width: $mobile-width)
-    .row
-        margin-left 0
-        margin-right 0
-        min-width 0
-        padding 0 5px
-        width 100%
-    [class*='col-']
-        float none
-        margin 0 0 10px 0
-        padding 0
-        width auto
-    [class*='col-sm-']
-        float left
-        margin 0 0 10px
-        padding 0 10px
-    for x in 1..12
-        .col-sm-{x}-12
-            width unit(round(((x)/12)*100, 2), '%')
+// for larger screens
+@media (min-width $large-screen)
+    generateFloatGrid('lg', $columns)
