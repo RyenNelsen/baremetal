@@ -3,10 +3,10 @@ generateFlexGrid($name = 'sm', $columns = 12)
     [class*={$classSelector}]
         padding 0 10px
     for $x in 1..$columns
-        .flex-{$name}-{$x}-{$columns}
+        .flex-{$name}-{$x}
             flex 0 0 round(1% * (($x / $columns) * 100), 2)
 
-.flex-grid
+.flex-row
     display flex
     flex-wrap wrap
     margin 0 auto
