@@ -7,6 +7,7 @@ var poststylus = require('poststylus');
 var stylint = require('gulp-stylint');
 
 var mainStyl = './styl/main.styl';
+var flexStyl = './styl/main-flexonly.styl'; // flexbox only grid
 
 gulp.task('build:dev', function() {
     gulp.src(mainStyl)
@@ -26,6 +27,16 @@ gulp.task('build:prod', function() {
     gulp.src(mainStyl)
         .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
         .pipe(rename('baremetal.css'))
+        .pipe(gulp.dest('./build/production'));
+    // flexbox-only grid system
+    gulp.src(flexStyl)
+        .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
+        .pipe(rename('baremetal.flex.css'))
+        .pipe(gulp.dest('./build/production'));
+    gulp.src(flexStyl)
+        .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
+        .pipe(cssnano({ discardComments: false }))
+        .pipe(rename('baremetal.flex.min.css'))
         .pipe(gulp.dest('./build/production'));
 });
 
