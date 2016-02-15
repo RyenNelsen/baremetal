@@ -6,6 +6,7 @@ var cssnano = require('gulp-cssnano');
 var poststylus = require('poststylus');
 var stylint = require('gulp-stylint');
 var rimraf = require('gulp-rimraf');
+var zip = require('gulp-zip');
 
 var mainStyl = './styl/main.styl';
 var flexStyl = './styl/main-flexonly.styl'; // flexbox only grid
@@ -69,4 +70,14 @@ gulp.task('stylus:watch', function() {
 
 gulp.task('watch', ['build:dev', 'stylus:watch']);
 
-gulp.task('default', ['lint', 'build:dev', 'build:prod']);
+gulp.task('default', ['lint', 'build:dev', 'build:prod'], function() {
+    gulp.src('./build/production/both/*')
+        .pipe(zip('both-grids.zip'))
+        .pipe(gulp.dest('./build/production/zips'));
+    gulp.src('./build/production/flex/*')
+        .pipe(zip('flex-grid.zip'))
+        .pipe(gulp.dest('./build/production/zips'));
+    gulp.src('./build/production/float/*')
+        .pipe(zip('float-grid.zip'))
+        .pipe(gulp.dest('./build/production/zips'));
+});

@@ -23,6 +23,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylint": "^3.0.0",
     "gulp-stylus": "^2.2.0",
+    "gulp-zip": "^3.1.0",
     "poststylus": "^0.2.2"
   }
 }
