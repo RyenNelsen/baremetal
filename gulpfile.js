@@ -5,6 +5,7 @@ var rename = require('gulp-rename');
 var cssnano = require('gulp-cssnano');
 var poststylus = require('poststylus');
 var stylint = require('gulp-stylint');
+var rimraf = require('gulp-rimraf');
 
 var mainStyl = './styl/main.styl';
 var flexStyl = './styl/main-flexonly.styl'; // flexbox only grid
@@ -49,6 +50,11 @@ gulp.task('build:prod', function() {
         .pipe(cssnano({ discardComments: false }))
         .pipe(rename('baremetal.float.min.css'))
         .pipe(gulp.dest('./build/production'));
+});
+
+gulp.task('clean', function() {
+    gulp.src('./build', { read: false })
+        .pipe(rimraf());
 });
 
 gulp.task('lint', function() {
