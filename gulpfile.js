@@ -7,10 +7,17 @@ var poststylus = require('poststylus');
 var stylint = require('gulp-stylint');
 var rimraf = require('gulp-rimraf');
 var zip = require('gulp-zip');
+var git = require('git-rev');
 
 var mainStyl = './styl/main.styl';
 var flexStyl = './styl/main-flexonly.styl'; // flexbox only grid
 var floatStyl = './styl/main-floatonly.styl'; // float only grid
+
+var tag = '0.0.0';
+
+git.tag(function(str) {
+    tag = str;
+});
 
 gulp.task('build:dev', function() {
     gulp.src(mainStyl)
@@ -72,12 +79,12 @@ gulp.task('watch', ['build:dev', 'stylus:watch']);
 
 gulp.task('default', ['lint', 'build:dev', 'build:prod'], function() {
     gulp.src('./build/production/both/*')
-        .pipe(zip('both-grids.zip'))
+        .pipe(zip('both-grids-' + tag + '.zip'))
         .pipe(gulp.dest('./build/production/zips'));
     gulp.src('./build/production/flex/*')
-        .pipe(zip('flex-grid.zip'))
+        .pipe(zip('flex-grid-' + tag + '.zip'))
         .pipe(gulp.dest('./build/production/zips'));
     gulp.src('./build/production/float/*')
-        .pipe(zip('float-grid.zip'))
+        .pipe(zip('float-grid-' + tag + '.zip'))
         .pipe(gulp.dest('./build/production/zips'));
 });
