@@ -6,10 +6,18 @@ var cssnano = require('gulp-cssnano');
 var poststylus = require('poststylus');
 var stylint = require('gulp-stylint');
 var rimraf = require('gulp-rimraf');
+var zip = require('gulp-zip');
+var git = require('git-rev');
 
 var mainStyl = './styl/main.styl';
 var flexStyl = './styl/main-flexonly.styl'; // flexbox only grid
 var floatStyl = './styl/main-floatonly.styl'; // float only grid
+
+var tag = '0.0.0';
+
+git.tag(function(str) {
+    tag = str;
+});
 
 gulp.task('build:dev', function() {
     gulp.src(mainStyl)
@@ -25,31 +33,31 @@ gulp.task('build:prod', function() {
         .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
         .pipe(cssnano({ discardComments: false }))
         .pipe(rename('baremetal.min.css'))
-        .pipe(gulp.dest('./build/production'));
+        .pipe(gulp.dest('./build/production/both'));
     gulp.src(mainStyl)
         .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
         .pipe(rename('baremetal.css'))
-        .pipe(gulp.dest('./build/production'));
+        .pipe(gulp.dest('./build/production/both'));
     // flexbox-only grid system
     gulp.src(flexStyl)
         .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
-        .pipe(rename('baremetal.flex.css'))
-        .pipe(gulp.dest('./build/production'));
+        .pipe(rename('baremetal.css'))
+        .pipe(gulp.dest('./build/production/flex'));
     gulp.src(flexStyl)
         .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
         .pipe(cssnano({ discardComments: false }))
-        .pipe(rename('baremetal.flex.min.css'))
-        .pipe(gulp.dest('./build/production'));
+        .pipe(rename('baremetal.min.css'))
+        .pipe(gulp.dest('./build/production/flex'));
     // class float-only grid system
     gulp.src(floatStyl)
         .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
-        .pipe(rename('baremetal.float.css'))
-        .pipe(gulp.dest('./build/production'));
+        .pipe(rename('baremetal.css'))
+        .pipe(gulp.dest('./build/production/float'));
     gulp.src(floatStyl)
         .pipe(stylus({ use: poststylus([ 'autoprefixer' ]) }))
         .pipe(cssnano({ discardComments: false }))
-        .pipe(rename('baremetal.float.min.css'))
-        .pipe(gulp.dest('./build/production'));
+        .pipe(rename('baremetal.min.css'))
+        .pipe(gulp.dest('./build/production/float'));
 });
 
 gulp.task('clean', function() {
@@ -69,4 +77,14 @@ gulp.task('stylus:watch', function() {
 
 gulp.task('watch', ['build:dev', 'stylus:watch']);
 
-gulp.task('default', ['lint', 'build:dev', 'build:prod']);
+gulp.task('default', ['lint', 'build:dev', 'build:prod'], function() {
+    gulp.src('./build/production/both/*')
+        .pipe(zip('both-grids-' + tag + '.zip'))
+        .pipe(gulp.dest('./build/production/zips'));
+    gulp.src('./build/production/flex/*')
+        .pipe(zip('flex-grid-' + tag + '.zip'))
+        .pipe(gulp.dest('./build/production/zips'));
+    gulp.src('./build/production/float/*')
+        .pipe(zip('float-grid-' + tag + '.zip'))
+        .pipe(gulp.dest('./build/production/zips'));
+});

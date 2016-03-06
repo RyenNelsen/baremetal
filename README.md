@@ -4,7 +4,7 @@ Lightweight CSS framework.
 ### Browser Support
 For the traditional float grid system, it should work in every browser IE>6. Transitions obviously will not function.
 
-For the flexbox grid system, it should work in every browser IE>8. This should be the preferred choice.
+For the flexbox grid system, it should work in every browser IE>9. This should be the preferred choice.
 
 ### Building Instructions
 Pull the repository from github:
