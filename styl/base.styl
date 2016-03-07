@@ -1,7 +1,7 @@
 // auto calculate all headings
 for x in 1..6
     {'h' + x}
-        font-size unit(1 + .3 * (6 - x), 'rem')
+        font-size unit(round(($ratio-major-second ** (6 - x)), 2), 'rem')
 
 h1, h2, h3, h4, h5, h6
     font-weight 500
